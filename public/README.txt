@@ -1,0 +1,1 @@
+Place your background image in this folder and name it fitness-cover.jpg
