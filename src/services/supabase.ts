@@ -6,19 +6,20 @@ const supabaseUrl =
 const supabaseAnonKey =
   import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl) {
+if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error(
-    "Missing VITE_SUPABASE_URL"
-  );
-}
-
-if (!supabaseAnonKey) {
-  throw new Error(
-    "Missing VITE_SUPABASE_ANON_KEY"
+    "Supabase environment variables are missing.",
   );
 }
 
 export const supabase = createClient(
   supabaseUrl,
-  supabaseAnonKey
+  supabaseAnonKey,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+    },
+  },
 );

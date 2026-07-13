@@ -20,13 +20,13 @@ import Signup from "./pages/Signup";
 import Welcome from "./pages/Welcome";
 import Workout from "./pages/Workout";
 
-import { useAuth } from "./context/AuthContext";
-
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<StartPage />} />
+      {/* Always show Welcome first */}
+      <Route path="/" element={<Welcome />} />
 
+      {/* Only logged-out users can open these pages */}
       <Route
         path="/auth-choice"
         element={
@@ -54,6 +54,7 @@ export default function App() {
         }
       />
 
+      {/* Logged-in pages */}
       <Route
         element={
           <ProtectedRoute>
@@ -76,23 +77,4 @@ export default function App() {
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
-}
-
-function StartPage() {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <main className="auth-loading">
-        <div className="loading-spinner" />
-        <p>Loading...</p>
-      </main>
-    );
-  }
-
-  if (user) {
-    return <Navigate to="/home" replace />;
-  }
-
-  return <Welcome />;
 }

@@ -1,6 +1,22 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 export default function Welcome() {
+  const navigate = useNavigate();
+  const { user, loading } = useAuth();
+
+  function handleStart() {
+    if (loading) {
+      return;
+    }
+
+    if (user) {
+      navigate("/home");
+    } else {
+      navigate("/auth-choice");
+    }
+  }
+
   return (
     <main className="welcome-page">
       <div className="welcome-overlay" />
@@ -12,12 +28,14 @@ export default function Welcome() {
           journey starts here
         </h1>
 
-        <Link
+        <button
+          type="button"
           className="glass-button"
-          to="/auth-choice"
+          onClick={handleStart}
+          disabled={loading}
         >
-          Start Now
-        </Link>
+          {loading ? "Loading..." : "Start Now"}
+        </button>
       </div>
     </main>
   );

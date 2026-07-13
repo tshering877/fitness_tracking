@@ -72,15 +72,24 @@ img { max-width: 100%; display: block; }
 
 .nav-item.active { background: #b7b7b7; }
 .welcome-page {
-  min-height: 100dvh;
   position: relative;
-  background:
-    linear-gradient(180deg, rgb(0 0 0 / .08), rgb(0 0 0 / .75)),
-    url("/fitness-cover.jpg") center / cover no-repeat,
-    radial-gradient(circle at 70% 20%, #585858, #090909 55%);
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  background-image: url("/download.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+
 }
 
-.welcome-overlay { position: absolute; inset: 0; background: rgb(0 0 0 / .12); }
+.welcome-overlay { position: absolute; inset: 0; background: rgb(0 0 0 / .45); }
 .welcome-content, .auth-choice {
   position: relative;
   z-index: 1;
